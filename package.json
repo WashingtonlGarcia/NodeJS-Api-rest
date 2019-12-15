@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
-    "correctCode": "yarn eslint --fix src --ext .js"
+    "correctCode": "eslint --fix src --ext .js",
+    "criarMigration": "sequelize db:migrate",
+    "desfazerMigration": "sequelize db:migrate:undo"
   },
   "dependencies": {
     "express": "^4.17.1",
