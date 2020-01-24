@@ -1,9 +1,13 @@
 // Onde feito a conexão com banco de dados
 import Sequelize from 'sequelize';
+
 import User from '../app/models/User';
+import File from '../app/models/File';
+
 import databaseConfig from '../config/database';
 
-const models = [User];
+const models = [User, File];
+
 class DataBase {
   constructor() {
     this.init();
@@ -12,7 +16,9 @@ class DataBase {
   init() {
     this.connection = new Sequelize(databaseConfig);
 
-    models.map(model => model.init(this.connection));
+    models
+      .map(model => model.init(this.connection))
+      .map(model => model.associate && model.associate(this.connection.models));
   }
 }
 
