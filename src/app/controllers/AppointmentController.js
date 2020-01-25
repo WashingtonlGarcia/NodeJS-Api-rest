@@ -73,6 +73,9 @@ class AppointmentController {
         .status(400)
         .json({ error: 'Appointment date is not available.' });
     }
+    if (provider_id === req.userId) {
+      return res.status(401).json({ error: 'The user cannot register.' });
+    }
     const appointment = await Appointment.create({
       user_id: req.userId,
       provider_id,
